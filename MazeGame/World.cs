@@ -39,6 +39,14 @@ namespace MazeGame
 
         }
 
+        // making Grid accessible to other class
+        public string GetElementAt(int x, int y)
+        {
+
+            return Grid[y, x];
+
+        }
+
         public bool IsPositionWalkable(int x, int y)
 
         {

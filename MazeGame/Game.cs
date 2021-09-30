@@ -7,17 +7,18 @@ using System.Threading.Tasks;
 
 namespace MazeGame
 {
-    class Game
+   public class Game
     {
-        private World MyWorld;
-        private Player CurrentPlayer;
+       private World MyWorld;
+       private Player CurrentPlayer;
         public void Start()
         {
+       // private World MyWorld;
+       // private Player CurrentPlayer;
 
 
-
-     //       setCursorPosition(4,2);
-     //        write("x");
+        //       setCursorPosition(4,2);
+        //        write("x");
 
 
         string[,] grid =
@@ -52,16 +53,29 @@ namespace MazeGame
 
                 {
                     case ConsoleKey.UpArrow:
-                        CurrentPlayer.Y -= 1;
+                        if(MyWorld.IsPositionWalkable(CurrentPlayer.Y - 1))
+                        {
+                            CurrentPlayer.Y -= 1;
+                        }
+                       
                         break;
                     case ConsoleKey.DownArrow:
-                        CurrentPlayer.Y += 1;
+                        if (MyWorld.IsPositionWalkable(CurrentPlayer.Y + 1))
+                        {
+                            CurrentPlayer.Y += 1;
+                        }
                         break;
                     case ConsoleKey.LeftArrow:
-                        CurrentPlayer.X -= 1;
+                        if (MyWorld.IsPositionWalkable(CurrentPlayer.Y))
+                        {
+                            CurrentPlayer.X -= 1;
+                        }
                         break;
                     case ConsoleKey.RightArrow:
-                        CurrentPlayer.X += 1;
+                        if (MyWorld.IsPositionWalkable(CurrentPlayer.Y))
+                        {
+                            CurrentPlayer.X += 1;
+                        }
                         break;
                     default:
                         break;
@@ -89,11 +103,15 @@ namespace MazeGame
                 // Check for player input from the keyboard and move the plaer
                 HandlePlayerInput();
                 //check if the player has reached the exit and end the game 
-
+                string elementAtplayerPos = MyWorld.GetElementAt(CurrentPlayer.X, CurrentPlayer.Y);
+                if(elementAtplayerPos == "X")
+                {
+                    break;
+                }
                 //give the consolw as chance to render.
                 System.Threading.Thread.Sleep(20);
 
-                break;
+              
             }
         }
     }
