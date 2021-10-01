@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace MazeGame
 {
-    class Player
+    class Player 
     {
 
         public int X { get; set; }
@@ -28,8 +29,6 @@ namespace MazeGame
          Console.ForegroundColor = PlayerColor;
             Console.SetCursorPosition(X, Y);
             Console.Write(PlayerMarker);
-
-
         }
         
     }
