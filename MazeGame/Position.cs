@@ -8,12 +8,12 @@ using static System.Console;
 
 namespace MazeGame 
 {
-    class World 
+    class Position 
     {
         private string[,] Grid;
        private int Rows;
         private int Cols;
-        public World(string[,]grid)
+        public Position(string[,]grid)
         {
             Grid = grid; 
             Rows = Grid.GetLength(0);

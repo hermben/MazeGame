@@ -11,59 +11,40 @@ namespace MazeGame
 {
    public class Game 
     {
-        private World GetWorld;
+        private Position GetPosition;
         private Player CurrentPlayer;
         public void Start()
         {
             Title = "Welcome to the Maze!";
             CursorVisible = false;
-        
-        // private World MyWorld;
-        // private Player CurrentPlayer;
-
-
-             // setCursorPosition(4,2);
-             //   write("x");
 
 
         string[,] grid =
-            {
-                {" ","=","=","=","=","=","="},
-                {"="," ","=","="," "," ","X"},
+            {   {" ","=","=","=","=","=","="},
+                {" ","=","=","="," ","=","="},
+                {" "," ","=","="," "," ","X"},
                 {" "," ","="," ","="," ","="},
                 {" "," "," "," "," "," ","="},
                 {"="," ","=","=","="," ","="},
                 {"=","=","=","=","=","=","="},
             };
 
-            GetWorld = new World(grid);
-            //GetWorld.Draw();
+            GetPosition = new Position(grid);
+            //GetPosition.Draw();
             
             
             CurrentPlayer = new Player(0,2);
-             CurrentPlayer.Draw();
+            // CurrentPlayer.Draw();
            // ReadKey(true);
             RunGameloop();
             // CurrentPlayer.Draw();
         }
         
-        private void DisplayIntro()
-        {
-
-
-        }
-
-        private void Displayoutro()
-
-        {
-
-
-
-        }
+   
         private void DrawFrame()
         {  
             Clear();
-            GetWorld.Draw();
+            GetPosition.Draw();
             CurrentPlayer.Draw();
         }
 
@@ -74,26 +55,26 @@ namespace MazeGame
             switch (Key)
             {
                 case ConsoleKey.UpArrow:
-                    if (GetWorld.IsPositionWalkable(CurrentPlayer.X, CurrentPlayer.Y - 1))
+                    if (GetPosition.IsPositionWalkable(CurrentPlayer.X, CurrentPlayer.Y - 1))
                     {
                         CurrentPlayer.Y -= 1;
                     }
 
                     break;
                 case ConsoleKey.DownArrow:
-                    if (GetWorld.IsPositionWalkable(CurrentPlayer.X, CurrentPlayer.Y + 1))
+                    if (GetPosition.IsPositionWalkable(CurrentPlayer.X, CurrentPlayer.Y + 1))
                     {
                         CurrentPlayer.Y += 1;
                     }
                     break;
                 case ConsoleKey.LeftArrow:
-                    if (GetWorld.IsPositionWalkable(CurrentPlayer.X - 1, CurrentPlayer.Y))
+                    if (GetPosition.IsPositionWalkable(CurrentPlayer.X - 1, CurrentPlayer.Y))
                     {
                         CurrentPlayer.X -= 1;
                     }
                     break;
                 case ConsoleKey.RightArrow:
-                    if (GetWorld.IsPositionWalkable(CurrentPlayer.X + 1, CurrentPlayer.Y))
+                    if (GetPosition.IsPositionWalkable(CurrentPlayer.X + 1, CurrentPlayer.Y))
                     {
                         CurrentPlayer.X += 1;
                     }
@@ -102,14 +83,11 @@ namespace MazeGame
                     break;
             }
         }
-        //Console.WriteLine(myWorld.IsPositionWalkable(0, 0));
-        //Console.WriteLine(myWorld.IsPositionWalkable(1, 1));
-        //Console.WriteLine(myWorld.IsPositionWalkable(6, 1));
-
+      
         // Console.WriteLine("\n\nPress any keys to exit....");
         private void RunGameloop()
         {
-            DisplayIntro();
+           
             while (true)
             {
                 // Draw everything
@@ -118,15 +96,15 @@ namespace MazeGame
                 // Check for player input from the keyboard and move the player
                 HandlePlayerInput();
                 //check if the player has reached the exit and end the game 
-                string elementAtplayerPos = GetWorld.GetElementAt(CurrentPlayer.X, CurrentPlayer.Y);
+                string elementAtplayerPos = GetPosition.GetElementAt(CurrentPlayer.X, CurrentPlayer.Y);
                 if (elementAtplayerPos == "X")
                 {
                     break;
                 }
-                //give the console as chance to render.
+                //allows the console to render display.
                 System.Threading.Thread.Sleep(20);
             }
-            Displayoutro();
+           
         }
     }
 }
